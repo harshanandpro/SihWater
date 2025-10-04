@@ -29,7 +29,7 @@ const QuestionsPage = () => {
       type: 'options',
       options: [
         { value: 'english', label: 'English', flag: '🇺🇸' },
-        { value: 'hindi', label: '[translate:हिंदी]', flag: '🇮🇳' }
+        { value: 'hindi', label: 'हिंदी', flag: '🇮🇳' }
       ]
     },
     {
