@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
+/* Reset and base styles */
 .home-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #1d4ed8 100%);
   font-family: 'Inter', sans-serif;
   position: relative;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Only prevent horizontal scroll */
+  width: 100%; /* Ensure full width */
 }
 
 /* Animated Background */
@@ -16,6 +18,8 @@
   width: 100%;
   height: 100%;
   opacity: 0.1;
+  overflow: hidden; /* Keep this for background layers */
+  pointer-events: none;
 }
 
 .water-layer {
@@ -38,10 +42,13 @@
 /* Floating Water Drops */
 .floating-water-drops {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
   z-index: 1;
+  overflow: hidden; /* Contain floating drops */
 }
 
 .floating-drop {
@@ -75,23 +82,25 @@
   }
 }
 
-/* Main Content */
+/* Main Content - Fixed overflow issues */
 .home-content {
   position: relative;
   z-index: 2;
   padding: 2rem;
   max-width: 1400px;
   margin: 0 auto;
+  width: 100%; /* Ensure full width */
+  box-sizing: border-box; /* Include padding in width */
 }
 
-/* Hero Section */
+/* Hero Section - Adjusted height */
 .hero-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 4rem;
-  padding: 4rem 0;
-  min-height: 90vh;
+  padding: 2rem 0; /* Reduced from 4rem */
+  min-height: 80vh; /* Reduced from 90vh */
 }
 
 .hero-content {
@@ -145,7 +154,7 @@
 }
 
 .highlight {
-  background: linear-gradient(45deg, #10b981, #059669);
+  background: linear-gradient(45deg, #0073ff, #0a47ed);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -175,7 +184,7 @@
 
 .stat-icon {
   font-size: 1.5rem;
-  color: #10b981;
+  color: #0665eb;
   animation: pulse 2s infinite;
 }
 
@@ -184,7 +193,7 @@
   50% { transform: scale(1.1); }
 }
 
-/* Hero Visual */
+/* Hero Visual - Removed overflow hidden */
 .hero-visual {
   display: flex;
   justify-content: center;
@@ -233,7 +242,7 @@
 
 .core-icon {
   font-size: 3rem;
-  color: #10b981;
+  color: #0665eb;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
@@ -273,7 +282,7 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  background: #10b981;
+  background: #0228ff;
   border-radius: 50%;
   top: 0;
   left: 50%;
@@ -283,7 +292,7 @@
 
 /* Metrics Section */
 .metrics-section {
-  margin: 4rem 0;
+  margin: 3rem 0; /* Reduced from 4rem */
   animation: slideInUp 1s ease-out 0.3s both;
 }
 
@@ -318,7 +327,7 @@
 
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Reduced min width */
   gap: 2rem;
   max-width: 1000px;
   margin: 0 auto;
@@ -331,7 +340,7 @@
   border-radius: 24px;
   padding: 2rem;
   position: relative;
-  overflow: hidden;
+  /* REMOVED: overflow: hidden; - this was causing issues */
   transition: transform 0.3s ease;
 }
 
@@ -348,6 +357,7 @@
   height: 4px;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
   animation: shimmer 2s infinite;
+  border-radius: 24px 24px 0 0; /* Match card border radius */
 }
 
 @keyframes shimmer {
@@ -371,6 +381,7 @@
   justify-content: center;
   font-size: 1.5rem;
   color: white;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .water-card .metric-icon {
@@ -385,8 +396,8 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #10b981;
-  font-size: 0.9rem;
+  color: #008156;
+  font-size: 1.2rem;
   font-weight: 600;
 }
 
@@ -445,7 +456,7 @@
 
 /* Actions Section */
 .actions-section {
-  margin: 4rem 0;
+  margin: 3rem 0; /* Reduced from 4rem */
   animation: slideInUp 1s ease-out 0.6s both;
 }
 
@@ -469,8 +480,10 @@
 
 .actions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Reduced min width */
   gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .action-card {
@@ -481,7 +494,7 @@
   border-radius: 24px;
   padding: 2.5rem;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  /* REMOVED: overflow: hidden; - this was causing issues */
   animation: cardSlideIn 0.8s ease-out;
   animation-fill-mode: both;
 }
@@ -509,6 +522,7 @@
   height: 4px;
   opacity: 0;
   transition: opacity 0.3s ease;
+  border-radius: 24px 24px 0 0; /* Match card border radius */
 }
 
 .action-card:hover .card-glow {
@@ -537,6 +551,7 @@
   font-size: 1.8rem;
   color: white;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .card-title {
@@ -602,8 +617,8 @@
 
 /* Inspiration Section */
 .inspiration-section {
-  margin: 4rem 0;
-  padding: 3rem 0;
+  margin: 3rem 0; /* Reduced from 4rem */
+  padding: 2rem 0; /* Reduced from 3rem */
   text-align: center;
   animation: slideInUp 1s ease-out 0.9s both;
 }
@@ -611,6 +626,7 @@
 .inspiration-content {
   max-width: 800px;
   margin: 0 auto;
+  padding: 0 1rem; /* Add padding for small screens */
 }
 
 .inspiration-quote {
@@ -621,6 +637,7 @@
   margin-bottom: 2rem;
   font-weight: 300;
   position: relative;
+  padding: 2rem 3rem; /* Add padding for quotes */
 }
 
 .inspiration-quote::before,
@@ -632,13 +649,13 @@
 }
 
 .inspiration-quote::before {
-  top: -1rem;
-  left: -2rem;
+  top: 0;
+  left: 0;
 }
 
 .inspiration-quote::after {
-  bottom: -2rem;
-  right: -2rem;
+  bottom: 0;
+  right: 0;
 }
 
 .inspiration-attribution {
@@ -658,10 +675,13 @@
 /* Decorative Elements */
 .decorative-elements {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
   z-index: 0;
+  overflow: hidden; /* Contain decorative elements */
 }
 
 .deco-circle {
@@ -712,14 +732,17 @@
     grid-template-columns: 1fr;
     text-align: center;
     gap: 2rem;
+    min-height: 70vh; /* Reduced height */
   }
 
   .metrics-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .actions-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
   }
 }
 
@@ -729,7 +752,8 @@
   }
 
   .hero-section {
-    padding: 2rem 0;
+    padding: 1.5rem 0;
+    min-height: 60vh; /* Further reduced */
   }
 
   .water-globe {
@@ -774,10 +798,27 @@
 
   .inspiration-quote {
     font-size: 1.25rem;
+    padding: 1.5rem 2rem; /* Reduced padding */
+  }
+
+  .inspiration-quote::before {
+    top: 0;
+    left: 0.5rem;
+    font-size: 2.5rem;
+  }
+
+  .inspiration-quote::after {
+    bottom: 0;
+    right: 0.5rem;
+    font-size: 2.5rem;
   }
 }
 
 @media (max-width: 480px) {
+  .home-content {
+    padding: 0.5rem;
+  }
+
   .hero-title {
     font-size: 2rem;
   }
@@ -795,5 +836,278 @@
     flex-direction: column;
     text-align: center;
     gap: 1rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .metric-card {
+    padding: 1rem;
+  }
+
+  .action-card {
+    padding: 1rem;
+  }
+
+  .inspiration-quote {
+    font-size: 1.1rem;
+    padding: 1rem 1.5rem;
+  }
+}
+
+/* Performance optimizations */
+.home-container * {
+  will-change: auto;
+}
+
+.hero-content,
+.hero-visual,
+.metric-card:hover,
+.action-card:hover {
+  will-change: transform;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fix any remaining layout issues */
+.home-container,
+.home-content,
+.metrics-section,
+.actions-section {
+  box-sizing: border-box;
+}
+/* Top Metrics Section - NEW STYLES */
+.top-metrics {
+  margin-top: 2rem !important; /* Bring to top */
+  margin-bottom: 3rem !important;
+  padding-top: 1rem;
+}
+
+.top-metrics .metrics-header h2 {
+  font-size: 2.2rem; /* Slightly smaller for top position */
+}
+
+/* Enhanced Metric Cards with Hover Effects */
+.metric-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 2rem;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Hover Glow Effects */
+.hover-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 24px;
+  opacity: 0;
+  transition: all 0.4s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.water-glow {
+  background: 
+    radial-gradient(circle at center, rgba(59, 130, 246, 0.3) 0%, rgba(14, 165, 233, 0.2) 40%, transparent 70%),
+    linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(14, 165, 233, 0.1));
+  box-shadow: 
+    0 0 40px rgba(59, 130, 246, 0.4),
+    inset 0 0 40px rgba(59, 130, 246, 0.1);
+}
+
+.money-glow {
+  background: 
+    radial-gradient(circle at center, rgba(16, 185, 129, 0.3) 0%, rgba(5, 150, 105, 0.2) 40%, transparent 70%),
+    linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.1));
+  box-shadow: 
+    0 0 40px rgba(16, 185, 129, 0.4),
+    inset 0 0 40px rgba(16, 185, 129, 0.1);
+}
+
+/* Water Card Hover Effects */
+.water-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(59, 130, 246, 0.08);
+  box-shadow: 
+    0 20px 60px rgba(59, 130, 246, 0.25),
+    0 0 80px rgba(59, 130, 246, 0.15);
+}
+
+.water-card:hover .hover-glow {
+  opacity: 1;
+}
+
+.water-card:hover .metric-value {
+  color: #0e73ef;
+  text-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+}
+
+.water-card:hover .metric-icon {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+}
+
+.water-card:hover .metric-sparkline {
+  color: rgba(59, 130, 246, 0.3);
+  transform: scale(1.1);
+}
+
+/* Money Card Hover Effects */
+.money-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.08);
+  box-shadow: 
+    0 20px 60px rgba(16, 185, 129, 0.25),
+    0 0 80px rgba(16, 185, 129, 0.15);
+}
+
+.money-card:hover .hover-glow {
+  opacity: 1;
+}
+
+.money-card:hover .metric-value {
+  color: #34d399;
+  text-shadow: 0 0 20px rgba(52, 211, 153, 0.5);
+}
+
+.money-card:hover .metric-icon {
+  background: linear-gradient(135deg, #10b981, #059669);
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+}
+
+.money-card:hover .metric-sparkline {
+  color: rgba(16, 185, 129, 0.3);
+  transform: scale(1.1);
+}
+
+/* Enhanced Transitions for All Elements */
+.metric-icon {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.metric-value {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.metric-sparkline {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Pulsing Animation for Hovered Cards */
+@keyframes waterPulse {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  70% { box-shadow: 0 0 0 20px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+@keyframes moneyPulse {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  70% { box-shadow: 0 0 0 20px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.water-card:hover .metric-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  animation: waterPulse 2s infinite;
+}
+
+.money-card:hover .metric-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 12px;
+  animation: moneyPulse 2s infinite;
+}
+
+/* Progress Bar Enhancements on Hover */
+.water-card:hover .water-progress {
+  background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6);
+  background-size: 200% 100%;
+  animation: progressShimmer 2s ease-in-out infinite;
+}
+
+.money-card:hover .money-progress {
+  background: linear-gradient(90deg, #10b981, #34d399, #10b981);
+  background-size: 200% 100%;
+  animation: progressShimmer 2s ease-in-out infinite;
+}
+
+@keyframes progressShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Floating Effect on Metric Cards */
+.water-card:hover,
+.money-card:hover {
+  animation: floatCard 3s ease-in-out infinite;
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(-8px) scale(1.02) rotate(0deg); }
+  33% { transform: translateY(-10px) scale(1.025) rotate(0.5deg); }
+  66% { transform: translateY(-6px) scale(1.015) rotate(-0.5deg); }
+}
+
+/* Hero Section Adjustments */
+.hero-section {
+  margin-top: 2rem; /* Reduced since metrics are now on top */
+  padding: 2rem 0;
+  min-height: 70vh; /* Reduced height */
+}
+
+/* Responsive adjustments for top metrics */
+@media (max-width: 768px) {
+  .top-metrics {
+    margin-top: 1rem !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  .top-metrics .metrics-header h2 {
+    font-size: 1.8rem;
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-4px) scale(1.01); /* Reduced transform on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .top-metrics .metrics-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .hover-glow {
+    display: none; /* Disable glow effects on very small screens for performance */
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-2px); /* Minimal transform on small screens */
   }
 }

@@ -74,7 +74,69 @@ const Home = () => {
 
       {/* Main Content */}
       <div className="home-content">
-        {/* Hero Section */}
+        {/* Metrics Section - MOVED TO TOP */}
+        <section className="metrics-section top-metrics">
+          <div className="metrics-header">
+            <h2>Your Impact Dashboard</h2>
+            <p>Real-time tracking of your water conservation journey</p>
+          </div>
+          
+          <div className="metrics-grid">
+            <div className="metric-card water-card">
+              <div className="metric-header">
+                <div className="metric-icon">
+                  <FaTint />
+                </div>
+                <div className="metric-trend">
+                  <BsGraphUp />
+                  <span>+15%</span>
+                </div>
+              </div>
+              <div className="metric-content">
+                <h3 className="metric-value">{waterSaved.toLocaleString()}</h3>
+                <p className="metric-label">Liters Water Saved</p>
+                <div className="metric-progress">
+                  <div className="progress-bar">
+                    <div className="progress-fill water-progress" style={{width: '75%'}}></div>
+                  </div>
+                  <span className="progress-text">75% of monthly goal</span>
+                </div>
+              </div>
+              <div className="metric-sparkline">
+                <MdWaves />
+              </div>
+              <div className="hover-glow water-glow"></div>
+            </div>
+
+            <div className="metric-card money-card">
+              <div className="metric-header">
+                <div className="metric-icon">
+                  <FaCoins />
+                </div>
+                <div className="metric-trend">
+                  <FaChartLine />
+                  <span>+22%</span>
+                </div>
+              </div>
+              <div className="metric-content">
+                <h3 className="metric-value">₹{moneySaved.toLocaleString()}</h3>
+                <p className="metric-label">Money Saved</p>
+                <div className="metric-progress">
+                  <div className="progress-bar">
+                    <div className="progress-fill money-progress" style={{width: '68%'}}></div>
+                  </div>
+                  <span className="progress-text">68% ROI achieved</span>
+                </div>
+              </div>
+              <div className="metric-sparkline">
+                <FaLeaf />
+              </div>
+              <div className="hover-glow money-glow"></div>
+            </div>
+          </div>
+        </section>
+
+        {/* Hero Section - MOVED BELOW METRICS */}
         <section className="hero-section">
           <div className="hero-content">
             <div className="hero-badge">
@@ -111,66 +173,6 @@ const Home = () => {
               </div>
               <div className="orbit orbit-3">
                 <div className="orbit-dot"></div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Metrics Section */}
-        <section className="metrics-section">
-          <div className="metrics-header">
-            <h2>Your Impact Dashboard</h2>
-            <p>Real-time tracking of your water conservation journey</p>
-          </div>
-          
-          <div className="metrics-grid">
-            <div className="metric-card water-card">
-              <div className="metric-header">
-                <div className="metric-icon">
-                  <FaTint />
-                </div>
-                <div className="metric-trend">
-                  <BsGraphUp />
-                  <span>+15%</span>
-                </div>
-              </div>
-              <div className="metric-content">
-                <h3 className="metric-value">{waterSaved.toLocaleString()}</h3>
-                <p className="metric-label">Liters Water Saved</p>
-                <div className="metric-progress">
-                  <div className="progress-bar">
-                    <div className="progress-fill water-progress" style={{width: '75%'}}></div>
-                  </div>
-                  <span className="progress-text">75% of monthly goal</span>
-                </div>
-              </div>
-              <div className="metric-sparkline">
-                <MdWaves />
-              </div>
-            </div>
-
-            <div className="metric-card money-card">
-              <div className="metric-header">
-                <div className="metric-icon">
-                  <FaCoins />
-                </div>
-                <div className="metric-trend">
-                  <FaChartLine />
-                  <span>+22%</span>
-                </div>
-              </div>
-              <div className="metric-content">
-                <h3 className="metric-value">₹{moneySaved.toLocaleString()}</h3>
-                <p className="metric-label">Money Saved</p>
-                <div className="metric-progress">
-                  <div className="progress-bar">
-                    <div className="progress-fill money-progress" style={{width: '68%'}}></div>
-                  </div>
-                  <span className="progress-text">68% ROI achieved</span>
-                </div>
-              </div>
-              <div className="metric-sparkline">
-                <FaLeaf />
               </div>
             </div>
           </div>
@@ -223,7 +225,7 @@ const Home = () => {
             </blockquote>
             <div className="inspiration-attribution">
               <div className="attribution-icon">
-                <IoWaterSharp />
+                <IoWaterSharp color='#044093ff'/>
               </div>
               <span>AquaHarvest Community</span>
             </div>
