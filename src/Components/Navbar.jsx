@@ -4,11 +4,32 @@ import { IoWaterSharp, IoRainyOutline, IoDocumentTextOutline } from 'react-icons
 import { MdDashboard, MdHelpCenter } from 'react-icons/md';
 import { BsDropletHalf } from 'react-icons/bs';
 import "./Navbar.css";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [usdata , setUsdata] = useState();
 
+const logout = async () => {
+  await signOut(auth);
+};
+const getUserData = async () => {
+  const user = auth.currentUser;
+  if (!user) return null;
+
+  const docRef = doc(db, "users", user.uid);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  } else {
+    return null;
+  }
+};
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20;
@@ -18,7 +39,11 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
+useEffect(() => {
+  getUserData().then(data => {
+    setUsdata(data);
+  });
+}, []);
   return (
     <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <div className="navbar-container">
@@ -76,7 +101,7 @@ const Navbar = () => {
               <div className="profile-avatar">
                 <FaUser className="profile-icon" />
               </div>
-              <span className="profile-name">John Doe</span>
+              <span className="profile-name">{console.log(usdata)}</span>
               <FaChevronDown className={`chevron ${profileOpen ? 'open' : ''}`} />
             </div>
             
@@ -91,7 +116,7 @@ const Navbar = () => {
                   <span>Settings</span>
                 </div>
                 <div className="dropdown-divider"></div>
-                <div className="dropdown-item logout">
+                <div className="dropdown-item logout" onClick={logout}>
                   <FaSignOutAlt className="dropdown-icon" />
                   <span>Logout</span>
                 </div>

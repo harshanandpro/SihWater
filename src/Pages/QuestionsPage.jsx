@@ -160,13 +160,13 @@ const QuestionsPage = () => {
       </div>
 
       {/* Floating Elements */}
-      <div className="floating-elements">
+      {/* <div className="floating-elements">
         {[...Array(6)].map((_, i) => (
           <div key={i} className={`floating-drop drop-${i + 1}`}>
             <BsDropletHalf />
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* Main Question Box */}
       <div className="question-wrapper">

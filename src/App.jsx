@@ -8,22 +8,36 @@ import Layout from './Layout'
 import Home from './Pages/Home'
 import AuthPage from './Pages/AuthPage'
 import QuestionsPage from './Pages/QuestionsPage'
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <Routes>
-        <Route element={<Layout/>}>
-          <Route path='/' element={<Home/>}/>
-        </Route>
+    <Routes>
+      {/* PROTECTED */}
+      <Route
+        element={
+          <PrivateRoute>
+            <Layout />
+          </PrivateRoute>
+        }
+      >
+        <Route path="/" element={<Home />} />
+      </Route>
 
-        <Route path='/login' element={<AuthPage/>}/>
-        <Route path='/questions' element={<QuestionsPage/>}/>
-      </Routes>
-    </>
-  )
+      {/* PUBLIC */}
+      <Route path="/questions" element={<QuestionsPage />} />
+
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <AuthPage />
+          </PublicRoute>
+        }
+      />
+    </Routes>
+  );
 }
 
-export default App
+export default App;

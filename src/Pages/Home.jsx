@@ -3,12 +3,18 @@ import { FaCalculator, FaPalette, FaClipboardCheck, FaTint, FaCoins, FaChartLine
 import { IoWaterSharp, IoRainyOutline } from 'react-icons/io5';
 import { BsDropletHalf, BsGraphUp } from 'react-icons/bs';
 import { MdWaves, MdEco } from 'react-icons/md';
-import { GiWaterDrop } from 'react-icons/gi';
+import { GiEvilFork, GiWaterDrop } from 'react-icons/gi';
 import './Home.css';
+import Calculator from '../Components/Calculator';
+import Fes from '../Components/Fes';
+import Design from '../Components/Design';
 
 const Home = () => {
   const [waterSaved, setWaterSaved] = useState(0);
   const [moneySaved, setMoneySaved] = useState(0);
+  const [openModalCalc, setOpenModalCalc] = useState(false);
+  const [openModalDes, setOpenModalDes] = useState(false);
+  const [openModalFes, setOpenModalFes] = useState(false);
 
   // Animated counter effect
   useEffect(() => {
@@ -188,7 +194,6 @@ const Home = () => {
           <div className="actions-grid">
             {actionButtons.map((button, index) => (
               <div key={button.title} className="action-card" style={{animationDelay: `${index * 0.2}s`}}>
-                <div className="card-glow" style={{background: button.gradient}}></div>
                 <div className="card-content">
                   <div className="card-header">
                     <div 
@@ -203,7 +208,17 @@ const Home = () => {
                   <button 
                     className="card-button"
                     style={{background: button.gradient}}
-                    onClick={() => console.log(`Navigate to ${button.path}`)}
+                    onClick={() => {
+                      if(index == 0){
+                        setOpenModalCalc(true)
+                      }
+                      else if(index == 1){
+                        setOpenModalDes(true)
+                      }
+                      else if(index == 2){
+                        setOpenModalFes(true)
+                      }
+                    }}
                   >
                     <span>Get Started</span>
                     <IoRainyOutline className="button-icon" />
@@ -239,6 +254,18 @@ const Home = () => {
         <div className="deco-circle circle-2"></div>
         <div className="deco-circle circle-3"></div>
       </div>
+      <Calculator
+  isOpen={openModalCalc}
+  onClose={() => setOpenModalCalc(false)}
+/>
+<Fes
+  isOpen={openModalFes}
+  onClose={() => setOpenModalFes(false)}
+/>
+<Design
+  isOpen={openModalDes}
+  onClose={() => setOpenModalDes(false)}
+/>
     </div>
   );
 };

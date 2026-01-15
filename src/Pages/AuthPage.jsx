@@ -3,6 +3,10 @@ import { FaUser, FaEnvelope, FaLock, FaPhone, FaEye, FaEyeSlash } from 'react-ic
 import { IoWaterSharp } from 'react-icons/io5';
 import { BsDropletHalf } from 'react-icons/bs';
 import './AuthPage.css';
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -13,6 +17,7 @@ const AuthPage = () => {
     mobile: '',
     password: ''
   });
+  
 
   const handleInputChange = (e) => {
     setFormData({
@@ -35,6 +40,26 @@ const AuthPage = () => {
     setFormData({ name: '', email: '', mobile: '', password: '' });
   };
 
+  const provider = new GoogleAuthProvider();
+const saveUser = async (user) => {
+  await setDoc(doc(db, "users", user.uid), {
+    name: user.displayName || "Anonymous",
+    email: user.email,
+    photo: user.photoURL || "",
+    createdAt: new Date()
+  }, { merge: true });
+};
+
+const googleLogin = async () => {
+  try {
+    await signInWithPopup(auth, provider);
+  } catch (err) {
+    console.error(err);
+  }
+  await signInWithPopup(auth, provider);
+saveUser(auth.currentUser);
+};
+
   return (
     <div className="auth-container">
       {/* Animated Water Background */}
@@ -44,14 +69,7 @@ const AuthPage = () => {
         <div className="wave wave3"></div>
       </div>
 
-      {/* Floating Water Drops */}
-      <div className="floating-drops">
-        {[...Array(8)].map((_, i) => (
-          <div key={i} className={`drop drop-${i + 1}`}>
-            <BsDropletHalf />
-          </div>
-        ))}
-      </div>
+      
 
       {/* Main Auth Card */}
       <div className="auth-card">
@@ -176,8 +194,11 @@ const AuthPage = () => {
             <button type="submit" className="submit-btn">
               <span>{isLogin ? 'Sign In' : 'Create Account'}</span>
               <div className="btn-ripple"></div>
+            </button> 
+            <button onClick={googleLogin} className="submit-btn google">
+              <span>Continue with Google</span>
+              <div className="btn-ripple"></div>
             </button>
-
             <div className="form-footer">
               <p>
                 {isLogin ? "Don't have an account? " : "Already have an account? "}

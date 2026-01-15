@@ -51,42 +51,6 @@
   100% { transform: translateX(33%) rotate(360deg); }
 }
 
-/* Floating Elements */
-.floating-elements {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.floating-drop {
-  position: absolute;
-  color: rgba(255, 255, 255, 0.2);
-  font-size: 2.5rem;
-  animation: dropFloat 8s infinite ease-in-out;
-}
-
-.drop-1 { left: 10%; animation-delay: 0s; }
-.drop-2 { left: 25%; animation-delay: 1.5s; }
-.drop-3 { left: 75%; animation-delay: 3s; }
-.drop-4 { left: 85%; animation-delay: 4.5s; }
-.drop-5 { left: 50%; animation-delay: 6s; }
-.drop-6 { left: 15%; animation-delay: 7.5s; }
-
-@keyframes dropFloat {
-  0%, 100% { 
-    transform: translateY(100vh) rotate(0deg) scale(0); 
-    opacity: 0; 
-  }
-  10% { 
-    opacity: 1; 
-    transform: translateY(90vh) rotate(45deg) scale(1); 
-  }
-  90% { 
-    opacity: 1; 
-    transform: translateY(-10vh) rotate(315deg) scale(1); 
-  }
-}
 
 /* Main Wrapper */
 .question-wrapper {

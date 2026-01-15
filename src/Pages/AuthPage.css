@@ -459,7 +459,9 @@
   margin-bottom: 1.5rem;
   box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
 }
-
+.google{
+    background: linear-gradient(135deg, #77ef7f, #09b70f) !important;
+}
 .submit-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
